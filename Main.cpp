@@ -16,7 +16,7 @@ float fPlayerA = 0.0f;
 int nMapHeight = 16;
 int nMapWidth = 16;
 
-
+float fFOV = 3.14159 / 4;
 
 int main(){
 
@@ -49,9 +49,18 @@ int main(){
     while(1)
     {///Main loop for the videogame 
 
-        for(int x = 0; x < nScreenWidth; x++0){
-            
+        for(int x = 0; x < nScreenWidth; x++){
 
+            float fRayAngle = (fPlayerA - fFOV / 2.0f) + ((float)x / (float)nScreenWidth) * fFOV;
+            
+            float fDistanceToWall = 0;
+            bool bHitWall = false;
+            
+            while(!bHitWall){
+                
+
+                fDistanceToWall += 0.1f;
+            }
             
         }
         
