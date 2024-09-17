@@ -10,6 +10,13 @@ int nScreenHeight = 40;
 ///character block
 float fPlayerX = 0.0f;
 float fPlayerY = 0.0f;
+float fPlayerA = 0.0f;
+
+///Constants for the map
+int nMapHeight = 16;
+int nMapWidth = 16;
+
+
 
 int main(){
 
@@ -20,10 +27,34 @@ int main(){
     SetConsoleActiveScreenBuffer(hConsole);
     DWORD dwBytesWritten = 0;
 
+    wstring map;
+    
+    map += L"################";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"#..............#";
+    map += L"################";
+    
     while(1)
     {///Main loop for the videogame 
 
+        for(int x = 0; x < nScreenWidth; x++0){
+            
 
+            
+        }
+        
         screen[nScreenWidth * nScreenHeight - 1] = '\0'; ///This sets the very the last character 
         WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, {0,0}, &dwBytesWritten);
         ///This prevents the console to scroll down when it is outputing the text
