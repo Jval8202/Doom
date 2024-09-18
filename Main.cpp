@@ -17,6 +17,7 @@ int nMapHeight = 16;
 int nMapWidth = 16;
 
 float fFOV = 3.14159 / 4;
+float fDepth = 16.0f;
 
 int main(){
 
@@ -55,12 +56,38 @@ int main(){
             
             float fDistanceToWall = 0;
             bool bHitWall = false;
+
+            float fEyeX = sinf(fRayAngle); //Unit vector for ray in player space
+            float fEyeY = cosf(fRayAngle);
             
-            while(!bHitWall){
-                
+            while(!bHitWall && fDistanceToWall < fDepth){
 
                 fDistanceToWall += 0.1f;
+                int nTestX = (int)(fPlayerX + fEyeX * fDistanceToWall);
+                int nTestY = (int)(fPlayerY+ fEyeY * fDistanceToWall);
+
+                if(nTestX < 0 || nTestX >= nMapWidth || nTestY < 0 || nTestY >= nMapHeight){
+
+                    bHitWall = true;
+                    fDistanceToWall = fDepth;
+                }
+                else
+                {  
+                    //Ray is inbounds so test to see if the ray cell is a wall block
+                    //if we hit something in the map with the # symbol, then we hit a wall, if not, 
+                    //then we did not hit a wall
+                    if(map[nTestY * nMapWidth + nTestX] == '#'){
+                            
+                        bHitWall = true;
+
+                    }
+                }
+
             }
+            
+            //calculating the distance between ceiling and floor
+            int nCeiling = (float)(nScreenHeight / 2.0) - nScreenHeight / ((float)fDistanceToWall);
+            int nFloor = nScreenHeight - nCeiling;
             
         }
         
